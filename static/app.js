@@ -1,4 +1,6 @@
 
+$(document).ready(function(){
+
 $('.delete-cupcake').click(delete_cupcake);
 
 async function delete_cupcake(){
@@ -8,13 +10,17 @@ $(this).parent().remove()
 };
 
 
-$('make-cupcake').click(make_cupcake)
+$('#create_form').on('submit', make_cupcake)
 
 async function make_cupcake(e){
+    e.preventDefault();
     const flavor = $('.flavor').val();
     const size = $('.size').val()
     const rating = $('.rating').val()
     const image = $('.image').val()
     await axios.post('/api/cupcakes', {flavor: flavor, size: size, rating: rating, image: image})
-    $('ul').append(this)
+    $('#cupcake-list').append(data)
+
+    
 }
+})

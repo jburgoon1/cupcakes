@@ -3,16 +3,18 @@
 {%block title%}Home{%endblock%}
 {%block content%}
 <h1>Cupcakes!</h1>
-<ul>
+<ul id = 'cupcake-list'>
     {%for cupcake in cupcakes%}
     <div>
     <img src="{{cupcake.image}}" alt="">
 <li>{{cupcake.flavor}} </li>
+<li>Size: {{cupcake.size}} </li>
+<li>Rating: {{cupcake.rating}} </li>
 <button class = "delete-cupcake" data-id = {{cupcake.id}}>X</button>
 </div>    
 {%endfor%}
 </ul>
-<form action='/api/cupcakes' method = "POST">
+<form id = "create_form" action = "/api/cupcakes" method = "POST">
 Flavor:<input type="text" class = 'flavor'>
 Size:<input type="text" class = 'size'>
 Rating:<input type="text" class = 'rating'>

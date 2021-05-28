@@ -29,7 +29,7 @@ def show_details(id):
 @app.route('/api/cupcakes/<int:id>', methods = ['PATCH'])
 def update_cupcake(id):
     cupcake = Cupcake.query.get_or_404(id)
-    cupcake.flavor =request.json.get('title', cupcake.flavor) 
+    cupcake.flavor =request.json.get('flavor', cupcake.flavor) 
     cupcake.size = request.json.get('size', cupcake.size) 
     cupcake.rating = request.json.get('rating', cupcake.rating) 
     cupcake.image = request.json.get('image', cupcake.image) 
@@ -44,7 +44,11 @@ def delete_cupcake(id):
 
 @app.route('/api/cupcakes', methods = ['POST'])
 def add_cupcake():
-    new_cupcake = Cupcake(flavor = request.json['flavor'], size = request.json['size'], rating = request.json['rating'], image = request.json['image'])
+    flavor =request.json.get('flavor') 
+    size = request.json.get('size') 
+    rating = request.json.get('rating') 
+    image = request.json.get('image') 
+    new_cupcake = Cupcake(flavor = flavor, size = size, rating = rating, image = image)
     db.session.add(new_cupcake)
     db.session.commit()
     return (jsonify(cupcake = new_cupcake.serialize()), 201)
